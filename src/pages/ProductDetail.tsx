@@ -19,6 +19,13 @@ const mockProducts: Product[] = [
     price: 149,
     imageUrl: 'https://via.placeholder.com/300x200',
   },
+   {
+    id: 3,
+    name: 'Laptop Pro 14',
+    description: 'Laptop performante per sviluppatori e creativi.',
+    price: 1299,
+    imageUrl: 'https://via.placeholder.com/300x200',
+  },
 ];
 
 const ProductDetail = () => {
