@@ -15,6 +15,7 @@ const CustomNavbar = () => {
           <Nav>
             <Nav.Link as={Link} to="/login">Login</Nav.Link>
             <Nav.Link as={Link} to="/register">Registrati</Nav.Link>
+            <Nav.Link as={Link} to="/my-orders">I miei ordini</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
