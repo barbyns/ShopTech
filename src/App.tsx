@@ -6,7 +6,7 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Navbar from './components/Navbar';
 import MyOrders from './pages/MyOrders';
-
+import AdminProducts from './pages/AdminProducts';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/my-orders" element={<MyOrders/>}/>
+        <Route path="/admin/products" element={<AdminProducts/>}/>
       </Routes>
     </Router>
   );
