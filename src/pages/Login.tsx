@@ -1,13 +1,16 @@
 import { useState, type FormEvent } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext'; // usa il contesto di autenticazione
 
 const Login = () => {
+  const { login } = useAuth(); // prende la funzione login dal context
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setValidated(true);
     setError('');
@@ -17,8 +20,20 @@ const Login = () => {
       return;
     }
 
-    // 🔐 Qui andrà la chiamata al backend per login
-    console.log('Login:', { email, password });
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) throw new Error('Credenziali errate');
+
+      const data = await response.json();
+      login(data.token); // salva il token nel context
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (

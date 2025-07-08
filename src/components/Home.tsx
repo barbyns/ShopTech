@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import ProductCard from '../components/ProductCard';
-import { Product } from '../types/Product';
+import type { Product } from '../types/Product';
 
 const mockProducts: Product[] = [
   {
@@ -15,6 +15,13 @@ const mockProducts: Product[] = [
     name: 'Auricolari Bluetooth',
     description: 'Suono perfetto e comodi',
     price: 149,
+    imageUrl: 'https://via.placeholder.com/300x200',
+  },
+   {
+    id: 3,
+    name: 'Switch 2',
+    description: 'Suono perfetto e comodi',
+    price: 350,
     imageUrl: 'https://via.placeholder.com/300x200',
   },
 ];
