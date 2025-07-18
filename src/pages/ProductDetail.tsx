@@ -7,25 +7,33 @@ import { useCart } from '../context/CartContext'; // 👈 IMPORT
 const mockProducts: Product[] = [
   {
     id: 1,
-    name: 'Smartphone X',
-    description: 'Telefono top di gamma con fotocamera ultra wide.',
+    name: 'Apple 16 ',
+    description: 'Apple iPhone 16 128 GB: Telefono 5G con Controllo fotocamera, chip A18 e tanta autonomia in più. Compatibile con AirPods; Azzurro.',
     price: 799,
-    imageUrl: 'https://via.placeholder.com/300x200',
+    imageUrl: 'https://m.media-amazon.com/images/I/61+GLqbh-cL._UF1000,1000_QL80_.jpg',
   },
   {
     id: 2,
-    name: 'Auricolari Bluetooth',
-    description: 'Suono perfetto e comodi tutto il giorno.',
+    name: 'AirPods Max',
+    description: 'Le cuffie over-ear per un ascolto davvero sublime, disponibili in colori vivaci. Le AirPods Max offrono un suono ad alta fedeltà incredibilmente dettagliato. L’audio spaziale personalizzato con rilevamento dinamico della posizione della testa ti proietta al centro della scena. Nota ⁴ La cancellazione attiva del rumore di livello pro elimina i rumori indesiderati.',
     price: 149,
-    imageUrl: 'https://via.placeholder.com/300x200',
+    imageUrl: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-max-hero-select-202409_FMT_WHH?wid=752&hei=636&fmt=jpeg&qlt=90&.v=WXBZVEZCOUNiUWlBYUtjZmtBc0J2MGkxeEVQUXVsbFk4WEhBc0JFOWdSN2pmMHBIdXRoME5iSzRYUmF4Y3dVRy81NGMrcU1sYkxwTFJaVHI1NEQzenBJRnRzZXYwZVJMZmZQVjdBR0RkVVNpdi91OXpsc3gvUHZvVGU1aUpOaFE',
   },
    {
     id: 3,
-    name: 'Laptop Pro 14',
+    name: 'MacBook Air 13" - Mezzanotte',
     description: 'Laptop performante per sviluppatori e creativi.',
     price: 1299,
-    imageUrl: 'https://via.placeholder.com/300x200',
+    imageUrl: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-og-202503?wid=1200&hei=630&fmt=jpeg&qlt=90&.v=1739216814915',
   },
+   {
+    id: 4,
+    name: 'Nintendo Switch 2',
+    description: 'Nuovi controller Joy-Con 2, completamente riprogettati: possono essere usati come un mouse nei giochi compatibili e si collegano di scatto alla console grazie a connettori magnetici​',
+    price: 450,
+    imageUrl: 'https://m.media-amazon.com/images/I/717JrHodikL.jpg',
+  },
+
 ];
 
 const ProductDetail = () => {

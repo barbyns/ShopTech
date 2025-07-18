@@ -5,17 +5,17 @@ import type { Product } from '../types/Product';
 const initialProducts: Product[] = [
   {
     id: 1,
-    name: 'Smartphone X',
+    name: 'Apple Iphone 16',
     description: 'Telefono top di gamma',
     price: 799,
-    imageUrl: 'https://via.placeholder.com/300x200',
+    imageUrl: 'https://m.media-amazon.com/images/I/61+GLqbh-cL._UF1000,1000_QL80_.jpg',
   },
   {
     id: 2,
-    name: 'Auricolari Bluetooth',
-    description: 'Auricolari comodi con ottimo audio',
+    name: 'AirPods Max',
+    description: 'Le cuffie over-ear per un ascolto davvero sublime, disponibili in colori vivaci.',
     price: 149,
-    imageUrl: 'https://via.placeholder.com/300x200',
+    imageUrl: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-max-hero-select-202409_FMT_WHH?wid=752&hei=636&fmt=jpeg&qlt=90&.v=WXBZVEZCOUNiUWlBYUtjZmtBc0J2MGkxeEVQUXVsbFk4WEhBc0JFOWdSN2pmMHBIdXRoME5iSzRYUmF4Y3dVRy81NGMrcU1sYkxwTFJaVHI1NEQzenBJRnRzZXYwZVJMZmZQVjdBR0RkVVNpdi91OXpsc3gvUHZvVGU1aUpOaFE',
   },
 ];
 

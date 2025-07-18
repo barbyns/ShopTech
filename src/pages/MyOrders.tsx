@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, ListGroup, Badge } from 'react-bootstrap';
-import type { Order } from '../types/order';
+import type { Order } from '../types/Order';
 
 const mockOrders: Order[] = [
   {
