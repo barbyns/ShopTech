@@ -33,6 +33,13 @@ const mockProducts: Product[] = [
     price: 450,
     imageUrl: 'https://m.media-amazon.com/images/I/717JrHodikL.jpg',
   },
+  {
+    id: 5,
+    name: 'SONY PlayStation 5 Console - Split Bundle (EU) (PS5)',
+    description: 'Nuovi controller Joy-Con 2, completamente riprogettati: possono essere usati come un mouse nei giochi compatibili e si collegano di scatto alla console grazie a connettori magnetici​',
+    price: 450,
+    imageUrl: 'https://m.media-amazon.com/images/I/51zgnbshSsL._UF894,1000_QL80_.jpg',
+  },
 
 ];
 
