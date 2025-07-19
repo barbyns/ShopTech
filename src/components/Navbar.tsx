@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const CustomNavbar = () => {
-  const { isLoggedIn, logout } = useAuth(); // ✅ chiamato dentro la funzione componente
+  const { isLoggedIn, logout } = useAuth(); 
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
