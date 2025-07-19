@@ -1,32 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Container, ListGroup, Badge } from 'react-bootstrap';
-import type { Order } from '../types/Order';
-
-const mockOrders: Order[] = [
-  {
-    id: 1,
-    products: [
-      { id: 1, name: 'Smartphone X', price: 799, description: '', imageUrl: '' },
-      { id: 2, name: 'Auricolari Bluetooth', price: 149, description: '', imageUrl: '' },
-    ],
-    total: 948,
-    date: '2025-07-01',
-  },
-  {
-    id: 2,
-    products: [{ id: 3, name: 'Laptop Pro 14', price: 1299, description: '', imageUrl: '' }],
-    total: 1299,
-    date: '2025-06-24',
-  },
-];
+import { Container, ListGroup, Badge, Row, Col, Image } from 'react-bootstrap';
+import { useOrders } from '../context/OrderContext';
 
 const MyOrders = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
-
-  useEffect(() => {
-    // 🔐 Qui in futuro verificheremo l'utente loggato e faremo una chiamata API
-    setOrders(mockOrders);
-  }, []);
+  const { orders } = useOrders();
 
   return (
     <Container className="mt-4">
@@ -37,16 +13,29 @@ const MyOrders = () => {
         <ListGroup>
           {orders.map(order => (
             <ListGroup.Item key={order.id}>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between flex-column flex-md-row">
                 <div>
                   <strong>Ordine #{order.id}</strong> - {order.date}
-                  <ul className="mb-0">
-                    {order.products.map(p => (
-                      <li key={p.id}>{p.name} – €{p.price.toFixed(2)}</li>
+                  <Row className="mt-3">
+                    {order.products.map(product => (
+                      <Col md={6} key={product.id} className="d-flex mb-3">
+                        <Image
+                          src={product.imageUrl}
+                          alt={product.name}
+                          style={{ width: '80px', height: '80px', objectFit: 'cover', marginRight: '1rem' }}
+                          rounded
+                        />
+                        <div>
+                          <div>{product.name}</div>
+                          <div>Quantità: {product.quantity}</div>
+                          <div>Prezzo: €{product.price.toFixed(2)}</div>
+                          <div>Subtotale: €{(product.price * product.quantity).toFixed(2)}</div>
+                        </div>
+                      </Col>
                     ))}
-                  </ul>
+                  </Row>
                 </div>
-                <Badge bg="secondary" className="align-self-start">
+                <Badge bg="secondary" className="align-self-start mt-2">
                   Totale: €{order.total.toFixed(2)}
                 </Badge>
               </div>
