@@ -26,7 +26,7 @@ const ProductCard = ({ product }: Props) => {
           <Button variant="primary">Dettagli</Button>
         </Link>
       </Card.Body>
-    
+
     </Card>
   );
 };
