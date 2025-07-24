@@ -1,29 +1,52 @@
-import { useState } from 'react';
-import { loginUser } from '../api/auth';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios'; // ✅ Usa il tuo file api.ts
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     try {
-      const res = await loginUser({ email, password });
-      localStorage.setItem('token', res.token); // salva il token
-      // redirect o stato loggato
+      const response = await api.post('/auth/login', {
+        email,
+        password
+      });
+
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      navigate('/account');
     } catch (err) {
-      setError('Credenziali non valide');
+      setError('Credenziali non valide o server non raggiungibile.');
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="login-container">
+      <h2>Accedi</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+        {error && <p className="error">{error}</p>}
+      </form>
+    </div>
   );
 };
 

@@ -9,6 +9,8 @@ import MyOrders from './pages/MyOrders';
 import AdminProducts from './pages/AdminProducts';
 import Profile from './pages/Profile';
 import CheckoutSuccess from './pages/CheckoutSuccess';
+import Account from './components/Account'; 
+
 function App() {
   return (
     <Router>
@@ -23,6 +25,7 @@ function App() {
         <Route path="/admin/products" element={<AdminProducts/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/checkout-success" element={<CheckoutSuccess/>}/>
+        <Route path="/account" element={<Account />} />
       </Routes>
     </Router>
   );
