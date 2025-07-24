@@ -1,4 +1,4 @@
-// src/api/auth.ts
+
 import api from './axios';
 
 export interface LoginData {
@@ -15,10 +15,10 @@ export interface RegisterData {
 
 export const loginUser = async (data: LoginData) => {
   const response = await api.post('/auth/login', data);
-  return response.data; // { token: "...", ... }
+  return response.data; 
 };
 
 export const registerUser = async (data: RegisterData) => {
   const response = await api.post('/auth/register', data);
-  return response.data; // user info or confirmation
+  return response.data; 
 };

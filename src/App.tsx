@@ -10,6 +10,7 @@ import AdminProducts from './pages/AdminProducts';
 import Profile from './pages/Profile';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import Account from './components/Account'; 
+import UserDashboard from './components/UserDashboard';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/checkout-success" element={<CheckoutSuccess/>}/>
         <Route path="/account" element={<Account />} />
+        <Route path="/account" element={<UserDashboard />} />
       </Routes>
     </Router>
   );

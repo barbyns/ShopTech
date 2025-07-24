@@ -1,6 +1,6 @@
-import  { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../api/axios'; 
 
 const Account = () => {
   const [user, setUser] = useState<any>(null);
@@ -9,13 +9,12 @@ const Account = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (!token) {
       navigate('/login');
       return;
     }
 
-    axios.get('http://localhost:8082/api/users/me', {
+    api.get('/users/me', {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -26,7 +25,7 @@ const Account = () => {
       })
       .catch(error => {
         console.error("Errore nel recupero dei dati utente:", error);
-        navigate('/login'); 
+        navigate('/login');
       });
   }, [navigate]);
 
