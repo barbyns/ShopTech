@@ -1,8 +1,7 @@
-// Cart.tsx
 import { Container, ListGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
-import { useOrders } from '../context/OrderContext';
 import { useNavigate } from 'react-router-dom';
+import api from '../api/axios';
 
 const Cart = () => {
   const {
@@ -12,16 +11,41 @@ const Cart = () => {
     increaseQuantity,
     decreaseQuantity,
   } = useCart();
-  const { addOrder } = useOrders();
   const navigate = useNavigate();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cart.length === 0) return;
-    addOrder(cart, total);
-    clearCart();
-    navigate('/my-orders'); // 🔁 redirect automatico
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Devi essere loggato per acquistare.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const orderData = {
+        orderItems: cart.map(item => ({
+          productId: item.id,
+          quantity: item.quantity
+        }))
+      };
+
+      await api.post('/orders', orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      alert('Ordine completato con successo!');
+      clearCart();
+      navigate('/my-orders');
+    } catch (error) {
+      console.error('Errore durante il checkout:', error);
+      alert('Errore durante l\'acquisto.');
+    }
   };
 
   return (

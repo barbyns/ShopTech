@@ -1,20 +1,42 @@
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useState } from 'react';
 
 const CustomNavbar = () => {
-  const { isLoggedIn, logout } = useAuth(); 
+  const { isLoggedIn, logout } = useAuth();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Cerca:", searchQuery);
+    // TODO: naviga o filtra i prodotti con `searchQuery`
+  };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
         <Navbar.Brand as={Link} to="/">ShopEase</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />
-        <Navbar.Collapse id="navbar">
+        <Navbar.Collapse id="navbar" className="justify-content-between">
+
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/cart">Carrello</Nav.Link>
           </Nav>
+
+          {/* 🔎 Barra di ricerca al centro */}
+          <Form className="d-flex mx-auto" onSubmit={handleSearch}>
+            <FormControl
+              type="search"
+              placeholder="Cerca prodotti..."
+              className="me-2"
+              aria-label="Cerca"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button variant="outline-light" type="submit">Cerca</Button>
+          </Form>
 
           <Nav>
             {isLoggedIn ? (
@@ -31,6 +53,7 @@ const CustomNavbar = () => {
               </>
             )}
           </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
