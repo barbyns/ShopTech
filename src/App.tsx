@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import Account from './components/Account'; 
 import UserDashboard from './components/UserDashboard';
+import SearchResults from './pages/SearchResults';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/checkout-success" element={<CheckoutSuccess/>}/>
         <Route path="/account" element={<Account />} />
         <Route path="/account" element={<UserDashboard />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
     </Router>
   );

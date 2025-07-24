@@ -1,16 +1,18 @@
 import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 
 const CustomNavbar = () => {
   const { isLoggedIn, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Cerca:", searchQuery);
-    // TODO: naviga o filtra i prodotti con `searchQuery`
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   return (
