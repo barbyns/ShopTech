@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 
 const CustomNavbar = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, isAdmin, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -25,15 +25,16 @@ const CustomNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/cart">Carrello</Nav.Link>
+            {isLoggedIn && isAdmin && (
+              <Nav.Link as={Link} to="/admin/products">Admin</Nav.Link>
+            )}
           </Nav>
 
-          {/* 🔎 Barra di ricerca al centro */}
           <Form className="d-flex mx-auto" onSubmit={handleSearch}>
             <FormControl
               type="search"
               placeholder="Cerca prodotti..."
               className="me-2"
-              aria-label="Cerca"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -45,7 +46,6 @@ const CustomNavbar = () => {
               <>
                 <Nav.Link as={Link} to="/profile">Profilo</Nav.Link>
                 <Nav.Link as={Link} to="/my-orders">I miei ordini</Nav.Link>
-                <Nav.Link as={Link} to="/admin/products">Admin</Nav.Link>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
               </>
             ) : (

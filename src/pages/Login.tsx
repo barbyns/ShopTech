@@ -1,26 +1,19 @@
 import { useState, type FormEvent } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom'; // ✅ importa useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { login } = useAuth();
-  const navigate = useNavigate(); // ✅ inizializza
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [validated, setValidated] = useState(false);
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setValidated(true);
     setError('');
-
-    if (!email || !password) {
-      setError('Per favore, compila tutti i campi.');
-      return;
-    }
 
     try {
       const response = await fetch('http://localhost:8080/api/auth/login', {
@@ -32,10 +25,16 @@ const Login = () => {
       if (!response.ok) throw new Error('Credenziali errate');
 
       const data = await response.json();
-      login(data.token);         // ✅ salva token
-      navigate('/');             // ✅ reindirizza alla home
+      login(data.token, data.ruoli); // login con token e ruoli
+
+      // 🔐 Redirect in base al ruolo
+      if (data.ruoli.includes('ADMIN')) {
+        navigate('/admin/products');
+      } else {
+        navigate('/');
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Errore durante il login');
     }
   };
 
@@ -44,7 +43,7 @@ const Login = () => {
       <h2 className="mb-4">Accedi</h2>
       {error && <Alert variant="danger">{error}</Alert>}
 
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
