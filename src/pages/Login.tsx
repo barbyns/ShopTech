@@ -25,10 +25,14 @@ const Login = () => {
       if (!response.ok) throw new Error('Credenziali errate');
 
       const data = await response.json();
-      login(data.token, data.ruoli); // login con token e ruoli
+
+      // Verifica che data.ruoli sia un array o set, fallback vuoto
+      const roles = data.ruoli ?? [];
+
+      login(data.token, roles); // login con token e ruoli
 
       // 🔐 Redirect in base al ruolo
-      if (data.ruoli.includes('ADMIN')) {
+      if (Array.isArray(roles) && roles.includes('ADMIN')) {
         navigate('/admin/products');
       } else {
         navigate('/');

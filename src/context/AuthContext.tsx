@@ -1,5 +1,4 @@
-// src/context/AuthContext.tsx
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 interface AuthContextType {
   token: string | null;
@@ -19,11 +18,24 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('jwtToken'));
-  const [roles, setRoles] = useState<string[]>(() => {
-    const saved = localStorage.getItem('userRoles');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [token, setToken] = useState<string | null>(null);
+  const [roles, setRoles] = useState<string[]>([]);
+
+  // Ripristina login da localStorage al refresh
+  useEffect(() => {
+    const savedToken = localStorage.getItem('jwtToken');
+    const savedRoles = localStorage.getItem('userRoles');
+    if (savedToken) {
+      setToken(savedToken);
+    }
+    if (savedRoles) {
+      try {
+        setRoles(JSON.parse(savedRoles));
+      } catch {
+        setRoles([]);
+      }
+    }
+  }, []);
 
   const login = (token: string, roles: string[]) => {
     setToken(token);

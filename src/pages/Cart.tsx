@@ -1,5 +1,6 @@
 import { Container, ListGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext'; // ✅ importiamo il context auth
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 
@@ -11,6 +12,8 @@ const Cart = () => {
     increaseQuantity,
     decreaseQuantity,
   } = useCart();
+
+  const { token, isLoggedIn } = useAuth(); // ✅ usa il context
   const navigate = useNavigate();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -18,8 +21,7 @@ const Cart = () => {
   const handleCheckout = async () => {
     if (cart.length === 0) return;
 
-    const token = localStorage.getItem('token');
-    if (!token) {
+    if (!isLoggedIn || !token) {
       alert('Devi essere loggato per acquistare.');
       navigate('/login');
       return;
@@ -44,7 +46,7 @@ const Cart = () => {
       navigate('/my-orders');
     } catch (error) {
       console.error('Errore durante il checkout:', error);
-      alert('Errore durante l\'acquisto.');
+      alert("Errore durante l'acquisto.");
     }
   };
 
