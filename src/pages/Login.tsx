@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../context/AuthContext'; // usa il contesto di autenticazione
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom'; // ✅ importa useNavigate
 
 const Login = () => {
-  const { login } = useAuth(); // prende la funzione login dal context
+  const { login } = useAuth();
+  const navigate = useNavigate(); // ✅ inizializza
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +32,8 @@ const Login = () => {
       if (!response.ok) throw new Error('Credenziali errate');
 
       const data = await response.json();
-      login(data.token); // salva il token nel context
+      login(data.token);         // ✅ salva token
+      navigate('/');             // ✅ reindirizza alla home
     } catch (err: any) {
       setError(err.message);
     }

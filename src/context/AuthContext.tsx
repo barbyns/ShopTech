@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = (token: string) => {
     setToken(token);
-    localStorage.setItem('token', token); 
+    localStorage.setItem('jwtToken', token); 
   };
 
   const logout = () => {
