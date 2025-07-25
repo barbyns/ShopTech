@@ -17,17 +17,17 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(() => {
-    return localStorage.getItem('jwtToken');
+    return localStorage.getItem('token'); 
   });
 
   const login = (token: string) => {
     setToken(token);
-    localStorage.setItem('jwtToken', token);
+    localStorage.setItem('token', token); 
   };
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('token'); 
   };
 
   return (

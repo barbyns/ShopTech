@@ -12,11 +12,14 @@ import CheckoutSuccess from './pages/CheckoutSuccess';
 import Account from './components/Account'; 
 import UserDashboard from './components/UserDashboard';
 import SearchResults from './pages/SearchResults';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <ToastContainer position="top-center" autoClose={2000} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

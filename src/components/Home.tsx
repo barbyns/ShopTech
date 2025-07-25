@@ -2,7 +2,7 @@
 import { Container } from 'react-bootstrap';
 import TechCarousel from '../components/TechCarousel';
 import HorizontalProductSlider from '../components/HorizontalProductuSlider';
-import { appleProducts, videogameProducts } from '../data/products'; // ✅ usa i dati centralizzati
+import { appleProducts, videogameProducts, AccessoriProducts } from '../data/products'; 
 
 const Home = () => {
   return (
@@ -10,6 +10,7 @@ const Home = () => {
       <TechCarousel />
       <HorizontalProductSlider title="Prodotti Apple" products={appleProducts} />
       <HorizontalProductSlider title="Videogiochi" products={videogameProducts} />
+      <HorizontalProductSlider title="Accessori" products={AccessoriProducts} />
     </Container>
   );
 };
