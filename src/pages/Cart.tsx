@@ -1,8 +1,8 @@
 import { Container, ListGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext'; // ✅ importiamo il context auth
+import { useAuth } from '../context/AuthContext'; 
 import { useNavigate } from 'react-router-dom';
-import api from '../api/axios';
+import axios from "axios";
 
 const Cart = () => {
   const {
@@ -13,7 +13,7 @@ const Cart = () => {
     decreaseQuantity,
   } = useCart();
 
-  const { token, isLoggedIn } = useAuth(); // ✅ usa il context
+  const { token, isLoggedIn } = useAuth(); 
   const navigate = useNavigate();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -29,17 +29,22 @@ const Cart = () => {
 
     try {
       const orderData = {
-        orderItems: cart.map(item => ({
+        items: cart.map(item => ({
           productId: item.id,
-          quantity: item.quantity
+          quantita: item.quantity
         }))
       };
 
-      await api.post('/orders', orderData, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      await axios.post(
+        "http://localhost:8080/api/orders",
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true, // opzionale
         }
-      });
+      );
 
       alert('Ordine completato con successo!');
       clearCart();
