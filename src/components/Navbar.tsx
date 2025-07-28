@@ -18,7 +18,7 @@ const CustomNavbar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand as={Link} to="/">ShopEase</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">ShopTech</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbar" className="justify-content-between">
 

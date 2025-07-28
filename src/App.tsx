@@ -15,8 +15,8 @@ import UserDashboard from './components/UserDashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './context/AuthContext';
+import type { JSX } from 'react';
 
-// 🔐 Componente per rotte protette Admin
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
   const { isAdmin } = useAuth();
   return isAdmin ? element : <Navigate to="/" />;

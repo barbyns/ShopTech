@@ -21,13 +21,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [roles, setRoles] = useState<string[]>([]);
 
-  // Ripristina login da localStorage al refresh
   useEffect(() => {
     const savedToken = localStorage.getItem('jwtToken');
     const savedRoles = localStorage.getItem('userRoles');
-    if (savedToken) {
-      setToken(savedToken);
-    }
+
+    if (savedToken) setToken(savedToken);
     if (savedRoles) {
       try {
         setRoles(JSON.parse(savedRoles));
@@ -37,11 +35,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  const login = (token: string, roles: string[]) => {
-    setToken(token);
-    setRoles(roles);
-    localStorage.setItem('jwtToken', token);
-    localStorage.setItem('userRoles', JSON.stringify(roles));
+  const login = (newToken: string, newRoles: string[]) => {
+    setToken(newToken);
+    setRoles(newRoles);
+    localStorage.setItem('jwtToken', newToken);
+    localStorage.setItem('userRoles', JSON.stringify(newRoles));
   };
 
   const logout = () => {
@@ -52,9 +50,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const isAdmin = roles.includes('ROLE_ADMIN');
+  const isLoggedIn = !!token;
 
   return (
-    <AuthContext.Provider value={{ token, roles, login, logout, isLoggedIn: !!token, isAdmin }}>
+    <AuthContext.Provider value={{ token, roles, login, logout, isLoggedIn, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );

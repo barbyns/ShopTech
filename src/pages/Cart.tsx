@@ -1,8 +1,8 @@
 import { Container, ListGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext'; 
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 
 const Cart = () => {
   const {
@@ -13,7 +13,7 @@ const Cart = () => {
     decreaseQuantity,
   } = useCart();
 
-  const { token, isLoggedIn } = useAuth(); 
+  const { token, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -29,29 +29,27 @@ const Cart = () => {
 
     try {
       const orderData = {
-        items: cart.map(item => ({
+        items: cart.map((item) => ({
           productId: item.id,
-          quantita: item.quantity
-        }))
+          quantita: item.quantity,
+        })),
       };
 
-      await axios.post(
-        "http://localhost:8080/api/orders",
-        orderData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true, // opzionale
-        }
-      );
+      const response = await axios.post('http://localhost:8080/api/orders', orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
 
+      console.log('Ordine completato:', response.data);
       alert('Ordine completato con successo!');
       clearCart();
       navigate('/my-orders');
     } catch (error) {
       console.error('Errore durante il checkout:', error);
-      alert("Errore durante l'acquisto.");
+      alert("Errore durante l'acquisto. Verifica di essere loggato.");
     }
   };
 
@@ -63,7 +61,7 @@ const Cart = () => {
       ) : (
         <>
           <ListGroup>
-            {cart.map(item => (
+            {cart.map((item) => (
               <ListGroup.Item key={item.id}>
                 <Row className="align-items-center">
                   <Col md={2}>
@@ -95,11 +93,7 @@ const Cart = () => {
                     </div>
                   </Col>
                   <Col md={3}>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={() => removeFromCart(item.id)}
-                    >
+                    <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>
                       Rimuovi
                     </Button>
                   </Col>
