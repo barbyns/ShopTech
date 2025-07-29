@@ -12,6 +12,7 @@ import CheckoutSuccess from './pages/CheckoutSuccess';
 import Account from './components/Account'; 
 import SearchResults from './pages/SearchResults';
 import UserDashboard from './components/UserDashboard';
+import Footer from './components/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './context/AuthContext';
@@ -24,25 +25,29 @@ const AdminRoute = ({ element }: { element: JSX.Element }) => {
 
 function App() {
   return (
-    <>
+    <div className="d-flex flex-column min-vh-100">
       <Navbar />
-      <ToastContainer position="top-center" autoClose={2000} />
+      
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/admin/products" element={<AdminRoute element={<AdminProducts />} />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/userdashboard" element={<UserDashboard />} />
+          <Route path="/search" element={<SearchResults />} />
+        </Routes>
+      </main>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/my-orders" element={<MyOrders />} />
-        <Route path="/admin/products" element={<AdminRoute element={<AdminProducts />} />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/checkout-success" element={<CheckoutSuccess />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/userdashboard" element={<UserDashboard />} />
-        <Route path="/search" element={<SearchResults />} />
-      </Routes>
-    </>
+      <Footer />
+      <ToastContainer position="top-center" autoClose={2000} />
+    </div>
   );
 }
 
