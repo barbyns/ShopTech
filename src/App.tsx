@@ -17,7 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './context/AuthContext';
 import type { JSX } from 'react';
-import Sidebar from './components/Sidebar';
+
 
 const AdminRoute = ({ element }: { element: JSX.Element }) => {
   const { isAdmin } = useAuth();
@@ -28,9 +28,6 @@ function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
-            <div style={{ display: 'flex' }}>
-        <Sidebar />
-        </div>
 
       
       <main className="flex-grow-1">
